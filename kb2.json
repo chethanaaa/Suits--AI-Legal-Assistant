@@ -1,0 +1,106 @@
+{
+    "rules": {
+        "habitability_violation": {
+            "conditions": [
+                "unresolved_maintenance_issue",
+                "health_hazard",
+                "tenant_notified_landlord",
+                "no_repair_in_reasonable_time"
+            ],
+            "action": "tenant_entitled_to_rent_reduction_or_abatement",
+            "compensation": {
+                "type": "percentage",
+                "value": "25-100",
+                "calculation_details": "Percentage of rent abated based on severity and duration of habitability issue."
+            }
+        },
+        "security_deposit_issue": {
+            "conditions": [
+                "security_deposit_not_returned",
+                "tenant_vacated_unit",
+                "no_damages_or_unpaid_rent"
+            ],
+            "action": "tenant_entitled_to_double_security_deposit",
+            "compensation": {
+                "type": "fixed",
+                "value": "2x security deposit",
+                "calculation_details": "Tenant is awarded double the originally paid security deposit amount."
+            }
+        },
+        "failure_to_provide_essential_services": {
+            "conditions": [
+                "no_heat_water_or_electricity",
+                "tenant_provided_written_notice",
+                "landlord_noncompliant_for_24_hours"
+            ],
+            "action": "tenant_entitled_to_substitute_housing_or_rent_deduction",
+            "compensation": {
+                "type": "fixed_or_percentage",
+                "value": "substitute_housing_cost or 50% rent reduction",
+                "calculation_details": "Substitute housing costs reimbursed or rent reduced by 50% depending on the severity and duration of the issue."
+            }
+        },
+        "retaliatory_eviction": {
+            "conditions": [
+                "tenant_reported_violation",
+                "landlord_issued_eviction_notice",
+                "within_six_months_of_report"
+            ],
+            "action": "tenant_entitled_to_remain_and_landlord_fined",
+            "compensation": {
+                "type": "fine",
+                "value": "up to $5,000",
+                "calculation_details": "Landlord fined up to $5,000 based on jurisdiction and severity of retaliation."
+            }
+        },
+        "illegal_lockout": {
+            "conditions": [
+                "tenant_locked_out_without_court_order",
+                "lock_changed_or_entry_blocked"
+            ],
+            "action": "tenant_entitled_to_reentry_and_damages",
+            "compensation": {
+                "type": "fixed",
+                "value": "$1,000 to $10,000",
+                "calculation_details": "Damages awarded based on state laws and length of illegal lockout."
+            }
+        },
+        "failure_to_address_health_hazard": {
+            "conditions": [
+                "mold_or_pest_issue",
+                "tenant_has_medical_report",
+                "inspection_confirms_issue"
+            ],
+            "action": "tenant_entitled_to_injunctive_relief_and_damages",
+            "compensation": {
+                "type": "medical_expenses_and_damages",
+                "value": "actual medical expenses + damages up to $20,000",
+                "calculation_details": "Compensation for medical expenses and additional damages based on severity."
+            }
+        },
+        "unauthorized_entry_by_landlord": {
+            "conditions": [
+                "landlord_entered_without_notice",
+                "no_emergency_or_consent"
+            ],
+            "action": "tenant_entitled_to_damages_for_privacy_violation",
+            "compensation": {
+                "type": "fixed",
+                "value": "$500 to $5,000",
+                "calculation_details": "Damages awarded based on the impact of privacy violation and state laws."
+            }
+        },
+        "notice_of_foreclosure": {
+            "conditions": [
+                "landlord_facing_foreclosure",
+                "tenant_not_informed_in_writing"
+            ],
+            "action": "tenant_entitled_to_terminate_lease",
+            "compensation": {
+                "type": "fixed",
+                "value": "1 month’s rent",
+                "calculation_details": "Tenant receives one month’s rent as compensation for sudden termination."
+            }
+        }
+    }
+}
