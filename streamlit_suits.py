@@ -126,6 +126,12 @@ from langchain.schema import HumanMessage
 from langchain.chains import RetrievalQA
 import logging
 from chains import create_decision_chain, create_rules_chain
+import json
+from utils import *
+
+# Load the kb data
+with open('./kb2.json', 'r') as file:
+    kb = json.load(file)
 
 # Suppress warnings
 logging.getLogger("cryptography").setLevel(logging.ERROR)
@@ -212,7 +218,9 @@ def interactive_legal_assistant(user_input):
         # Determine the applicable rule
         rule_result = rules_chain.invoke({"case_details": conversation})
         print(f"RULE RESULT: {rule_result.selected_rule}")
-        st.session_state["chat_history"].append(("System", f"Applicable Rule: {rule_result.selected_rule}"))
+        action = get_action_by_rule(kb, rule_result.selected_rule)
+        compensation = get_compensation_details(kb, rule_result.selected_rule)
+        st.session_state["chat_history"].append(("System", f"Applicable Rule: {rule_result.selected_rule}, Action: {action}, Compensation: {compensation}"))
         return assistant_response, rule_result.selected_rule
 
     # Append response to chat history
@@ -231,8 +239,8 @@ if user_input := st.chat_input("Enter your query or response here..."):
     st.session_state["chat_history"].append(("User", user_input))
     assistant_response, rule = interactive_legal_assistant(user_input)
     st.session_state["chat_history"].append(("Assistant", assistant_response))
-    if rule != None:
-        st.session_state["chat_history"].append(("Rule Applied", rule))
+    # if rule != None:
+    #     st.session_state["chat_history"].append(("System", f"Applicable Rule: {rule}"))
 
 
 if st.button("Provide Feedback"):
