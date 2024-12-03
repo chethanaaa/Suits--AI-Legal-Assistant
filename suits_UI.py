@@ -70,22 +70,24 @@ st.markdown(
 )
 
 # Navigation Buttons
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 # st.write(st.experimental_query_pages())
 
 
 with col1:
     if st.button("📄 Document Summarizer"):
-        switch_page("summarizer")
+        switch_page("Summarizer")
 
 with col2:
     if st.button("🤔 Decision Assistant"):
-        switch_page("streamlit_suits")
+        switch_page("Streamlit_Suits")
 
 with col3:
     if st.button("🎭 Legal Simulation Studio"):
         switch_page("Legal_Simulation_Studio")
-
+with col4:
+    if st.button("🤖 Persona Simulation Studio"):
+        switch_page("Persona_Simulator")
 # Footer Disclaimer
 st.markdown(
     "<hr><small style='color: gray;'>Disclaimer: Suits is for informational purposes only and relies solely on the provided documents. It is not a substitute for professional legal advice.</small>",
