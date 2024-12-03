@@ -137,14 +137,19 @@ with open('./kb2.json', 'r') as file:
 logging.getLogger("cryptography").setLevel(logging.ERROR)
 logging.getLogger("pypdf").setLevel(logging.ERROR)
 
+with open("config.json", "r") as file:
+    config = json.load(file)
+
+openai_key = config["openai_key"]
+
 decision_chain = create_decision_chain(openai_key)
 rules_chain = create_rules_chain(openai_key)
 # Load PDF documents
 pdf_paths = [
-    "./RLTO Summary_2023_EN_FINAL.pdf",
-    "./14X-8-802 HEATING SYSTEMS_.pdf",
-    "./Municipal_Code_Chapter_5-14.pdf",
-    "./775 ILCS 5_ Illinois Human Rights Act_.pdf"
+    "./data/RLTO Summary_2023_EN_FINAL.pdf",
+    "./data/14X-8-802 HEATING SYSTEMS_.pdf",
+    "./data/Municipal_Code_Chapter_5-14.pdf",
+    "./data/775 ILCS 5_ Illinois Human Rights Act_.pdf"
 ]
 documents = []
 for pdf_path in pdf_paths:
@@ -251,8 +256,10 @@ if st.button("Provide Feedback"):
 
 
 # Display chat history
-for role, content in st.session_state["chat_history"]:
-    with st.chat_message(role.lower()):
+for message in st.session_state["chat_history"]:
+    role = message.get("role", "").lower()  # Safely extract the "role"
+    content = message.get("content", "")  # Safely extract the "content"
+    with st.chat_message(role):
         st.markdown(content)
 
 # Disclaimer

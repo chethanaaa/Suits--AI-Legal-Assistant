@@ -71,18 +71,20 @@ st.markdown(
 
 # Navigation Buttons
 col1, col2, col3 = st.columns(3)
+# st.write(st.experimental_query_pages())
+
 
 with col1:
     if st.button("📄 Document Summarizer"):
-        switch_page("Document Summarizer")
+        switch_page("summarizer")
 
 with col2:
     if st.button("🤔 Decision Assistant"):
-        switch_page("Decision Assistant")
+        switch_page("streamlit_suits")
 
 with col3:
     if st.button("🎭 Legal Simulation Studio"):
-        switch_page("Legal Simulation Studio")
+        switch_page("Legal_Simulation_Studio")
 
 # Footer Disclaimer
 st.markdown(

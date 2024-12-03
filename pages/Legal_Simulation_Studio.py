@@ -130,7 +130,10 @@ if case_details.strip():
         )
 
 # Display chat
+
+
 for message in st.session_state["chat_history"]:
+    print(message)
     with st.chat_message(message["role"].lower()):
         st.markdown(message["content"])
         if "citations" in message:
